@@ -22,7 +22,21 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-      
+        'phone',
+        'address',
+        'bio',
+        'location',
+        'website',
+        'photo',
+        'timezone',
+        'language',
+        'notifications_email',
+        'notifications_push',
+        'notifications_marketing',
+        'privacy_profile',
+        'privacy_activity',
+        'privacy_search',
+        'theme',
     ];
 
     /**
@@ -42,5 +56,70 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'notifications_email' => 'boolean',
+        'notifications_push' => 'boolean',
+        'notifications_marketing' => 'boolean',
+        'privacy_profile' => 'boolean',
+        'privacy_activity' => 'boolean',
+        'privacy_search' => 'boolean',
     ];
+
+    /**
+     * Get the evaluations for the user.
+     */
+    public function evaluations()
+    {
+        return $this->hasMany(DocumentEvaluation::class);
+    }
+
+    /**
+     * Get the documents for the user (if user_id exists in documents table).
+     */
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
+    /**
+     * Get the user's photo URL.
+     */
+    public function getPhotoUrlAttribute()
+    {
+        if ($this->photo) {
+            return asset('storage/' . $this->photo);
+        }
+        return null;
+    }
+
+    /**
+     * Get the user's initials for avatar.
+     */
+    public function getInitialsAttribute()
+    {
+        return strtoupper(substr($this->name, 0, 1));
+    }
+
+    /**
+     * Get the user's average rating.
+     */
+    public function getAverageRatingAttribute()
+    {
+        return $this->evaluations()->avg('rating');
+    }
+
+    /**
+     * Get the user's total evaluations count.
+     */
+    public function getTotalEvaluationsAttribute()
+    {
+        return $this->evaluations()->count();
+    }
+
+    /**
+     * Get the user's created date with fallback.
+     */
+    public function getCreatedAtFormattedAttribute()
+    {
+        return $this->created_at ? $this->created_at->format('M Y') : 'N/A';
+    }
 }

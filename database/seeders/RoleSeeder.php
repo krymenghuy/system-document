@@ -17,10 +17,6 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'name' => 'Super Admin',
-                'value' => 'superadmin'
-            ],
-            [
                 'name' => 'Admin',
                 'value' => 'admin'
             ],
@@ -37,7 +33,7 @@ class RoleSeeder extends Seeder
                 'value' => 'outsider'
             ],
 
-  
+
         ];
 
         foreach ($roles as $role) {
@@ -55,7 +51,7 @@ class RoleSeeder extends Seeder
                     'update' => 1,
                     'show' => 1,
                     'delete' => 1,
-                    'download' => 1,	
+                    'download' => 1,
                 ]);
             }
         }

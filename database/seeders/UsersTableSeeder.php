@@ -16,17 +16,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
         $users = [
             [
-                'name' => 'SuperAdmin',
-                'username' => 'superadmin',
-                'role' => 'superadmin',	
-                'email' => 'superadmin@gmail.com',
-            ],
-            [
                 'name' => 'Admin',
-                'username' => 'admin',	
+                'username' => 'admin',
                 'role' => 'admin',
                 'email' => 'admin@gmail.com',
             ],
@@ -46,7 +40,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Outsider',
                 'username' => 'outsider',
                 'role' => 'outsider',
-                'email' => 'outsider@gmail.com',	
+                'email' => 'outsider@gmail.com',
             ],
         ];
 

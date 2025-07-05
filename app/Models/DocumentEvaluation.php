@@ -13,6 +13,7 @@ class DocumentEvaluation extends Model
         'document_id',
         'user_id',
         'text',
+        'rating',
     ];
 
     public function document()

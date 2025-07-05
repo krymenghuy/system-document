@@ -9,11 +9,10 @@ class Role extends Model
 {
     use HasFactory;
      protected $fillable = [
-        'superadmin',
         'admin',
         'lecturer',
         'student',
         'outsider',
-      
+
     ];
 }

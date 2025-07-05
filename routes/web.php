@@ -1,6 +1,7 @@
 <?php
 // use App\Http\Controllers\FrontendS\AuthController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 // use app/Http/Controllers/frontend/AuthController.php;
 Route::group(['prefix' => '/admin'], function () {
     Auth::routes(['register' => true, 'logout' => 'false']);
@@ -71,21 +72,69 @@ Route::group(['namespace' => 'App\Http\controllers\Backends', 'prefix' => '/admi
       Route::get('/company','CompanyController@index')->name('admin.company');
       Route::get('/company/edit','CompanyController@edit')->name('admin.company.edit');
       Route::post('/company/update','CompanyController@update')->name('admin.company.update');
-  
+
 
 });
 
-// frontend
+// frontend routes
 Route::group(['namespace' => 'App\Http\controllers\Frontends'], function () {
 
+    // Home page
     Route::get('/', 'HomeController@index')->name('user.name');
-    // auth
-    route::post('/user/auth/login', 'AuthController@login')->name('user.auth.login');
+
+    // Document management
+    Route::get('/documents', 'DocumentController@index')->name('frontend.documents');
+    Route::get('/documents/{document}', 'DocumentController@show')->name('frontend.documents.show');
+    Route::get('/documents/{document}/download', 'DocumentController@download')->name('frontend.documents.download');
+
+    // Categories
+    Route::get('/categories', 'CategoryController@index')->name('frontend.categories');
+    Route::get('/categories/{category}', 'CategoryController@show')->name('frontend.categories.show');
+
+    // Search
+    Route::get('/search', 'SearchController@index')->name('frontend.search');
+
+    // User dashboard (requires authentication)
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/dashboard', 'DashboardController@index')->name('frontend.dashboard');
+        Route::get('/profile', 'ProfileController@index')->name('frontend.profile');
+        Route::post('/profile/update', 'ProfileController@update')->name('frontend.profile.update');
+        Route::get('/my-documents', 'DocumentController@myDocuments')->name('frontend.my-documents');
+        Route::post('/documents/{document}/evaluate', 'DocumentController@evaluate')->name('frontend.documents.evaluate');
+    });
+
+    // Auth
     route::post('/user/auth/login', 'AuthController@login')->name('user.auth.login');
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 route::fallback(function () {
-    return redirect()->route('admin.home');
+    return redirect()->route('user.name');
+});
+
+// Frontend Routes
+Route::prefix('frontend')->name('frontend.')->group(function () {
+    Route::get('/documents', [App\Http\Controllers\Frontends\DocumentController::class, 'index'])->name('documents');
+    Route::get('/documents/{document}', [App\Http\Controllers\Frontends\DocumentController::class, 'show'])->name('documents.show');
+    Route::get('/documents/{document}/download', [App\Http\Controllers\Frontends\DocumentController::class, 'download'])->name('documents.download');
+    Route::post('/documents/{document}/evaluate', [App\Http\Controllers\Frontends\DocumentController::class, 'evaluate'])->name('documents.evaluate');
+
+    Route::get('/categories', [App\Http\Controllers\Frontends\CategoryController::class, 'index'])->name('categories');
+    Route::get('/categories/{category}', [App\Http\Controllers\Frontends\CategoryController::class, 'show'])->name('categories.show');
+
+    Route::get('/search', [App\Http\Controllers\Frontends\SearchController::class, 'index'])->name('search');
+
+    Route::get('/dashboard', [App\Http\Controllers\Frontends\DashboardController::class, 'index'])->name('dashboard');
+
+    // Profile routes
+    Route::get('/profile', [App\Http\Controllers\Frontends\ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', [App\Http\Controllers\Frontends\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [App\Http\Controllers\Frontends\ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [App\Http\Controllers\Frontends\ProfileController::class, 'changePassword'])->name('profile.password');
+    Route::delete('/profile', [App\Http\Controllers\Frontends\ProfileController::class, 'deleteAccount'])->name('profile.delete');
+    Route::get('/profile/export', [App\Http\Controllers\Frontends\ProfileController::class, 'exportData'])->name('profile.export');
+    Route::get('/profile/activity', [App\Http\Controllers\Frontends\ProfileController::class, 'activity'])->name('profile.activity');
+    Route::get('/profile/settings', [App\Http\Controllers\Frontends\ProfileController::class, 'settings'])->name('profile.settings');
+    Route::put('/profile/settings', [App\Http\Controllers\Frontends\ProfileController::class, 'updateSettings'])->name('profile.settings.update');
 });
