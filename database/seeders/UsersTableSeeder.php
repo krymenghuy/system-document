@@ -19,12 +19,15 @@ class UsersTableSeeder extends Seeder
 
         $users = [
             [
+<<<<<<< HEAD
                 'name' => 'Super Admin',
                 'username' => 'superadmin',
                 'role' => 'superadmin',
                 'email' => 'superadmin@gmail.com',
             ],
             [
+=======
+>>>>>>> 9a9aa51486357edfe72c6b3321aafa5821e401bf
                 'name' => 'Admin',
                 'username' => 'admin',
                 'role' => 'admin',
@@ -51,6 +54,7 @@ class UsersTableSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
+<<<<<<< HEAD
             DB::table('users')->updateOrInsert(
                 [
                     'username' => $user['username'],
@@ -63,6 +67,15 @@ class UsersTableSeeder extends Seeder
                     'password' => Hash::make('12345678'),
                 ]
             );
+=======
+            \DB::table('users')->insert([
+                'name' => $user['name'],
+                'username' => $user['username'],
+                'role' => $user['role'],
+                'email' => $user['email'],
+                'password' => Hash::make('12345678'),
+            ]);
+>>>>>>> 9a9aa51486357edfe72c6b3321aafa5821e401bf
         }
     }
 }

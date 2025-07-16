@@ -12,10 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+<<<<<<< HEAD
             $table->text('bio')->nullable()->after('email');
             $table->string('location')->nullable()->after('bio');
             $table->string('website')->nullable()->after('location');
             $table->string('timezone')->default('UTC')->after('website');
+=======
+            $table->text('bio')->nullable()->after('address');
+            $table->string('location')->nullable()->after('bio');
+            $table->string('website')->nullable()->after('location');
+            $table->string('photo')->nullable()->after('website');
+            $table->string('timezone')->default('UTC')->after('photo');
+>>>>>>> 9a9aa51486357edfe72c6b3321aafa5821e401bf
             $table->string('language')->default('en')->after('timezone');
             $table->boolean('notifications_email')->default(true)->after('language');
             $table->boolean('notifications_push')->default(true)->after('notifications_email');

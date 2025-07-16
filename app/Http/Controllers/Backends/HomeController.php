@@ -20,9 +20,15 @@ class HomeController extends Controller
         $role = auth()->user()->role;
         $role_id = DB::table('roles')->where('value', $role)->first()?->id;
         $permission = DB::table('permissions')->where('alias', 'dashboard')->first();
+<<<<<<< HEAD
 
         $role_permission = DB::table('role_permissions')->where(['role_id' => $role_id, 'permission_id' => $permission->id])->first();
         if (!$role_permission || $role_permission->views == 0) {
+=======
+       
+        $role_permission = DB::table('role_permissions')->where(['role_id' => $role_id, 'permission_id' => $permission->id])->first();
+        if ($role_permission->views == 0) {
+>>>>>>> 9a9aa51486357edfe72c6b3321aafa5821e401bf
             return redirect()->route('admin.documents');
         }
 

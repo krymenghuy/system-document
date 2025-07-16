@@ -1,7 +1,11 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
     <!-- Brand Logo -->
     <a href="{{ route('admin.home') }}" class="brand-link">
+<<<<<<< HEAD
         <img src="{{ asset($company->photo) }}" alt="AdminLTE Logo"
+=======
+        <img src="{{ asset($company->photo ?? 'images/default-logo.png') }}" alt="AdminLTE Logo"
+>>>>>>> 9a9aa51486357edfe72c6b3321aafa5821e401bf
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light text-white">DOCUMENT SYSTEM</span>
     </a>

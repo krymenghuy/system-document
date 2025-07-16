@@ -3,8 +3,12 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+<<<<<<< HEAD
         "vercel-build": "npm run build",
         "postbuild": "echo 'Build complete. Assets are in public/build.'"
+=======
+        "vercel-build": "npm run build"
+>>>>>>> 9a9aa51486357edfe72c6b3321aafa5821e401bf
     },
 
     "devDependencies": {
