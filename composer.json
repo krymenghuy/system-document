@@ -52,15 +52,12 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-<<<<<<< HEAD
-        ],
-        "vercel-build": [
+          ],
+          "vercel-build": [
             "php artisan config:cache",
             "php artisan route:cache",
             "php artisan view:cache"
-=======
->>>>>>> 9a9aa51486357edfe72c6b3321aafa5821e401bf
-        ]
+          ]
     },
     "extra": {
         "laravel": {
