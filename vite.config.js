@@ -11,10 +11,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-<<<<<<< HEAD
     build: {
         outDir: 'public/build'
     }
-=======
->>>>>>> 9a9aa51486357edfe72c6b3321aafa5821e401bf
 });
