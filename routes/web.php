@@ -77,7 +77,7 @@ Route::group(['namespace' => 'App\Http\controllers\Backends', 'prefix' => '/admi
 });
 
 // frontend routes
-Route::group(['namespace' => 'App\Http\controllers\Frontends'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Frontends'], function () {
 
     // Home page
     Route::get('/', 'HomeController@index')->name('user.name');
